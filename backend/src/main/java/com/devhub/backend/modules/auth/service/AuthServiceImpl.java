@@ -1,5 +1,7 @@
 package com.devhub.backend.modules.auth.service;
 
+import com.devhub.backend.common.exception.EmailAlreadyExistsException;
+import com.devhub.backend.common.exception.UsernameAlreadyExistsException;
 import com.devhub.backend.modules.auth.dto.RegisterRequest;
 import com.devhub.backend.modules.auth.dto.RegisterResponse;
 import com.devhub.backend.modules.auth.entity.User;
@@ -22,11 +24,11 @@ public class AuthServiceImpl implements AuthService{
     public RegisterResponse register(RegisterRequest request) {
 
         if(userRepository.existsByEmail(request.getEmail())){
-            throw  new RuntimeException("Email already exists");
+            throw  new EmailAlreadyExistsException();
         }
 
         if(userRepository.existsByUsername(request.getUsername())){
-            throw new RuntimeException("Username already exists");
+            throw new UsernameAlreadyExistsException();
         }
 
         User user = new User();
