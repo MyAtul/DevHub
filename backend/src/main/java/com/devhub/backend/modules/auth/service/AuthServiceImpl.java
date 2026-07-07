@@ -1,11 +1,15 @@
 package com.devhub.backend.modules.auth.service;
 
 import com.devhub.backend.common.exception.EmailAlreadyExistsException;
+import com.devhub.backend.common.exception.InvalidCredentialsException;
 import com.devhub.backend.common.exception.UsernameAlreadyExistsException;
+import com.devhub.backend.modules.auth.dto.LoginRequest;
+import com.devhub.backend.modules.auth.dto.AuthResponse;
 import com.devhub.backend.modules.auth.dto.RegisterRequest;
 import com.devhub.backend.modules.auth.dto.RegisterResponse;
 import com.devhub.backend.modules.auth.entity.User;
 import com.devhub.backend.modules.auth.repository.UserRepository;
+import com.devhub.backend.modules.auth.security.JwtService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -14,10 +18,12 @@ public class AuthServiceImpl implements AuthService{
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JwtService jwtService;
 
-    public AuthServiceImpl(UserRepository userRepository,PasswordEncoder passwordEncoder) {
+    public AuthServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtService jwtService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.jwtService = jwtService;
     }
 
     @Override
@@ -48,6 +54,34 @@ public class AuthServiceImpl implements AuthService{
         response.setUsername(savedUser.getUsername());
         response.setEmail(savedUser.getEmail());
         response.setMessage("User Registered Successfully");
+
+        return response;
+    }
+
+    @Override
+    public AuthResponse login(LoginRequest request){
+
+        User user = userRepository.findByEmail(request.getEmail())
+                .orElseThrow(InvalidCredentialsException::new);
+
+        if(!passwordEncoder.matches(
+                request.getPassword(),
+                user.getPassword()
+        )){
+            throw new InvalidCredentialsException();
+        }
+
+        String token = jwtService.generateAccessToken(user);
+
+        AuthResponse response = new AuthResponse();
+
+        response.setAccessToken(token);
+        response.setTokenType("Bearer");
+        response.setExpiresIn(36000L);
+        response.setId(user.getId());
+        response.setUsername(user.getUsername());
+        response.setEmail(user.getEmail());
+        response.setMessage("Login Successful");
 
         return response;
     }
