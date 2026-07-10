@@ -1,9 +1,6 @@
 package com.devhub.backend.modules.auth.controller;
 
-import com.devhub.backend.modules.auth.dto.LoginRequest;
-import com.devhub.backend.modules.auth.dto.AuthResponse;
-import com.devhub.backend.modules.auth.dto.RegisterRequest;
-import com.devhub.backend.modules.auth.dto.RegisterResponse;
+import com.devhub.backend.modules.auth.dto.*;
 import com.devhub.backend.modules.auth.service.AuthService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -31,6 +28,13 @@ public class AuthController {
     public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginRequest request){
         AuthResponse response = authService.login(request);
         return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @PostMapping("/refresh")
+    public ResponseEntity<AuthResponse> refreshToken(@Valid @RequestBody RefreshTokenRequest request) {
+
+        return ResponseEntity.ok( authService.refreshToken(request) );
+
     }
 
     @GetMapping("/test")

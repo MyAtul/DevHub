@@ -24,6 +24,25 @@ public class JwtServiceImpl implements JwtService{
     }
 
     @Override
+    public String generateAccessToken(User user) {
+        Date now = new Date();
+
+        Date expiry = new Date(
+                now.getTime() + jwtProperties.getAccessTokenExpiration()
+        );
+
+        return Jwts.builder()
+                .subject(user.getEmail())
+                .claim(JwtClaims.USER_ID, user.getId())
+                .claim(JwtClaims.USERNAME, user.getUsername())
+                .issuer(jwtProperties.getIssuer())
+                .issuedAt(now)
+                .expiration(expiry)
+                .signWith(getSigningKey())
+                .compact();
+    }
+
+    @Override
     public TokenPair generateTokens(User user,String refreshToken) {
 
         Date now = new Date();

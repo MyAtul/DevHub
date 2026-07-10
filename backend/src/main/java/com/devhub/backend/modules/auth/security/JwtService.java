@@ -6,6 +6,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 public interface JwtService {
 
+    String generateAccessToken(User user);
+
     TokenPair generateTokens(User user,String refreshToken);
 
     String extractUsername(String token);

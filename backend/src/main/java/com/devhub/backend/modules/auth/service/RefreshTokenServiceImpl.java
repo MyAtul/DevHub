@@ -1,5 +1,6 @@
 package com.devhub.backend.modules.auth.service;
 
+import com.devhub.backend.common.exception.InvalidRefreshTokenException;
 import com.devhub.backend.common.util.RandomTokenGenerator;
 import com.devhub.backend.common.util.TokenHashUtil;
 import com.devhub.backend.modules.auth.config.JwtProperties;
@@ -7,7 +8,9 @@ import com.devhub.backend.modules.auth.entity.RefreshToken;
 import com.devhub.backend.modules.auth.entity.User;
 import com.devhub.backend.modules.auth.repository.RefreshTokenRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.management.relation.InvalidRelationIdException;
 import java.time.LocalDateTime;
 
 @Service
@@ -53,22 +56,43 @@ public class RefreshTokenServiceImpl implements RefreshTokenService{
     }
 
     @Override
-    public RefreshToken verifyRefreshToken(String refreshToken) {
-        return null;
+    public RefreshToken verifyRefreshToken(String rawToken) {
+
+        String tokenHash = TokenHashUtil.hash(rawToken);
+
+        RefreshToken refreshToken = refreshTokenRepository
+                .findByTokenHash(tokenHash)
+                .orElseThrow(InvalidRefreshTokenException::new);
+
+        if(Boolean.TRUE.equals(refreshToken.getRevoked())){
+            throw new InvalidRefreshTokenException();
+        }
+
+        if(refreshToken.getExpiresAt().isBefore(LocalDateTime.now())){
+            throw new InvalidRefreshTokenException();
+        }
+
+        return refreshToken;
     }
 
     @Override
-    public void revokeRefreshToken(String refreshToken) {
+    public void revokeRefreshToken(String rawToken) {
+
+        RefreshToken refreshToken = verifyRefreshToken(rawToken);
+
+        refreshToken.setRevoked(true);
+
+        refreshTokenRepository.save(refreshToken);
 
     }
 
     @Override
     public void revokeAllUserTokens(User user) {
-
+        throw new UnsupportedOperationException("Not implemented yet");
     }
 
     @Override
     public void deleteExpiredTokens() {
-
+        throw new UnsupportedOperationException("Not implemented yet");
     }
 }

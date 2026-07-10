@@ -1,9 +1,6 @@
 package com.devhub.backend.modules.auth.service;
 
-import com.devhub.backend.modules.auth.dto.LoginRequest;
-import com.devhub.backend.modules.auth.dto.AuthResponse;
-import com.devhub.backend.modules.auth.dto.RegisterRequest;
-import com.devhub.backend.modules.auth.dto.RegisterResponse;
+import com.devhub.backend.modules.auth.dto.*;
 
 public interface AuthService {
 
@@ -11,4 +8,5 @@ public interface AuthService {
 
     AuthResponse login(LoginRequest request);
 
+    AuthResponse refreshToken(RefreshTokenRequest request);
 }
