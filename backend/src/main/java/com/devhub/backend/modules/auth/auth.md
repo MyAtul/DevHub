@@ -82,7 +82,7 @@ The Authentication module is responsible for user registration, authentication, 
 
 * User must exist.
 * Password must match the stored BCrypt hash.
-* A JWT access token is generated after successful authentication.
+* A JWT access tokenHash is generated after successful authentication.
 * Email not found and incorrect password return the same error message.
 
 ### Request
@@ -121,7 +121,7 @@ The Authentication module is responsible for user registration, authentication, 
 
 ## JWT Claims
 
-The generated access token contains the following claims:
+The generated access tokenHash contains the following claims:
 
 | Claim      | Description          |
 | ---------- | -------------------- |
@@ -407,7 +407,7 @@ Authentication Module
 
 # Future Enhancements (Sprint 3+)
 
-* Refresh token support
+* Refresh tokenHash support
 * TokenPair abstraction
 * Logout
 * User profile endpoint (`/me`)

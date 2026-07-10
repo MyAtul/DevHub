@@ -9,6 +9,7 @@ public class AuthResponse {
     private String accessToken;
     private String tokenType;
     private Long expiresIn;
+    private String refreshToken;
 
     public Long getId() {
         return id;
@@ -64,5 +65,13 @@ public class AuthResponse {
 
     public void setExpiresIn(Long expiresIn) {
         this.expiresIn = expiresIn;
+    }
+
+    public String getRefreshToken() {
+        return refreshToken;
+    }
+
+    public void setRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
     }
 }

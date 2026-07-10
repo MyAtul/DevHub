@@ -1,6 +1,7 @@
 package com.devhub.backend.modules.auth.security;
 
 import com.devhub.backend.modules.auth.config.JwtProperties;
+import com.devhub.backend.modules.auth.dto.TokenPair;
 import com.devhub.backend.modules.auth.entity.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -23,7 +24,7 @@ public class JwtServiceImpl implements JwtService{
     }
 
     @Override
-    public String generateAccessToken(User user) {
+    public TokenPair generateTokens(User user,String refreshToken) {
 
         Date now = new Date();
 
@@ -31,7 +32,7 @@ public class JwtServiceImpl implements JwtService{
                 now.getTime() + jwtProperties.getAccessTokenExpiration()
         );
 
-        return Jwts.builder()
+        String accessToken =  Jwts.builder()
                 .subject(user.getEmail())
                 .claim(JwtClaims.USER_ID, user.getId())
                 .claim(JwtClaims.USERNAME, user.getUsername())
@@ -40,6 +41,14 @@ public class JwtServiceImpl implements JwtService{
                 .expiration(expiry)
                 .signWith(getSigningKey())
                 .compact();
+
+        TokenPair tokenPair = new TokenPair();
+
+        tokenPair.setAccessToken(accessToken);
+        tokenPair.setRefreshToken(refreshToken);
+        tokenPair.setAccessTokenExpireIn(jwtProperties.getAccessTokenExpiration() / 1000);
+        tokenPair.setRefreshTokenExpireIn(jwtProperties.getRefreshTokenExpiration()/1000);
+        return tokenPair;
     }
 
     @Override
