@@ -1,9 +1,15 @@
-import React from 'react'
+import CTASection from "../components/Home/CTASection";
+import FeaturedModules from "../components/Home/FeaturedModules";
+import HeroSection from "../components/Home/HeroSection";
 
-const HomePage = () => {
+export default function HomePage(){
   return (
-    <div>HomePage</div>
+    <>
+      <HeroSection/>
+
+      <FeaturedModules/>
+
+      <CTASection/>
+    </>
   )
 }
-
-export default HomePage
