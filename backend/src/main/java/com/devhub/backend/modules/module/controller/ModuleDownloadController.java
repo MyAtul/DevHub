@@ -5,12 +5,14 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1/modules")
+@CrossOrigin(origins = "http://localhost:5173")
 public class ModuleDownloadController {
 
     private final ModuleDownloadService moduleDownloadService;
@@ -27,7 +29,7 @@ public class ModuleDownloadController {
         return ResponseEntity.ok()
                 .header(
                         HttpHeaders.CONTENT_DISPOSITION,
-                        "attachment; filename=backend.zip"
+                        "attachment; filename=devhub-auth-backend-v1.0.zip"
                 )
                 .contentType(MediaType.APPLICATION_OCTET_STREAM)
                 .body(resource);
@@ -41,7 +43,7 @@ public class ModuleDownloadController {
         return ResponseEntity.ok()
                 .header(
                         HttpHeaders.CONTENT_DISPOSITION,
-                        "attachment; filename=frontend.zip"
+                        "attachment; filename=devhub-auth-frontend-v1.0.zip"
                 )
                 .contentType(MediaType.APPLICATION_OCTET_STREAM)
                 .body(resource);

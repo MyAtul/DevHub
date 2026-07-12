@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
 public class ModuleDownloadServiceImpl implements ModuleDownloadService {
 
     private static final String AUTH_BACKEND =
-            "downloads/authentication/backend.zip";
+            "downloads/authentication/devhub-auth-backend-v1.0.zip";
 
     private static final String AUTH_FRONTEND =
-            "downloads/authentication/frontend.zip";
+            "downloads/authentication/devhub-auth-frontend-v1.0.zip";
 
     private static final String AUTH_FULLSTACK =
             "downloads/authentication/fullstack.zip";

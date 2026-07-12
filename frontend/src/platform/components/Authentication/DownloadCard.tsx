@@ -1,5 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../../modules/auth/hooks/useAuth";
+import moduleDownloadService from "../../services/moduleDownloadService";
 
 type DownloadCardProps = {
   title: string;
@@ -17,18 +18,44 @@ export default function DownloadCard({
   const navigate = useNavigate();
   const location = useLocation();
 
-  const handleDownload = () => {
+  const handleDownload = async () => {
 
-    if (!session.isAuthenticated) {
-      navigate("/login", {
-        state: {
-            from: location.pathname,
-        },
-        });
-      return;
-    }
+      if (!session.isAuthenticated) {
 
-    alert(`Downloading ${downloadType} module...`);
+          navigate("/login", {
+              state: {
+                  from: location.pathname,
+              },
+          });
+
+          return;
+      }
+
+      try {
+
+          switch (downloadType) {
+
+              case "backend":
+                  await moduleDownloadService.downloadBackend();
+                  break;
+
+              case "frontend":
+                  await moduleDownloadService.downloadFrontend();
+                  break;
+
+              case "full":
+                  await moduleDownloadService.downloadFullStack();
+                  break;
+
+          }
+
+      } catch (error) {
+
+          console.error(error);
+          alert("Download failed.");
+
+      }
+
   };
 
   return (
@@ -44,7 +71,7 @@ export default function DownloadCard({
 
       <button
         onClick={handleDownload}
-        className="mt-6 rounded-lg bg-white px-5 py-3 text-black hover:bg-gray-200"
+        className="mt-6 rounded-lg bg-white px-5 py-3 text-black hover:bg-gray-200 cursor-pointer"
       >
         Download
       </button>
