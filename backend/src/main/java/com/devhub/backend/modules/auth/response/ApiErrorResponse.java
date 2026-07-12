@@ -1,4 +1,4 @@
-package com.devhub.backend.common.response;
+package com.devhub.backend.modules.auth.response;
 
 
 import java.time.LocalDateTime;

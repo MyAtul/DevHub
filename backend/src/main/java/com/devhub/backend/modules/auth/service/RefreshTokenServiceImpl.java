@@ -1,16 +1,14 @@
 package com.devhub.backend.modules.auth.service;
 
-import com.devhub.backend.common.exception.InvalidRefreshTokenException;
-import com.devhub.backend.common.util.RandomTokenGenerator;
-import com.devhub.backend.common.util.TokenHashUtil;
+import com.devhub.backend.modules.auth.exception.InvalidRefreshTokenException;
+import com.devhub.backend.modules.auth.util.RandomTokenGenerator;
+import com.devhub.backend.modules.auth.util.TokenHashUtil;
 import com.devhub.backend.modules.auth.config.JwtProperties;
 import com.devhub.backend.modules.auth.entity.RefreshToken;
 import com.devhub.backend.modules.auth.entity.User;
 import com.devhub.backend.modules.auth.repository.RefreshTokenRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import javax.management.relation.InvalidRelationIdException;
 import java.time.LocalDateTime;
 
 @Service

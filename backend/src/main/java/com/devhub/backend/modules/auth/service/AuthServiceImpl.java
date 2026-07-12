@@ -1,8 +1,8 @@
 package com.devhub.backend.modules.auth.service;
 
-import com.devhub.backend.common.exception.EmailAlreadyExistsException;
-import com.devhub.backend.common.exception.InvalidCredentialsException;
-import com.devhub.backend.common.exception.UsernameAlreadyExistsException;
+import com.devhub.backend.modules.auth.exception.EmailAlreadyExistsException;
+import com.devhub.backend.modules.auth.exception.InvalidCredentialsException;
+import com.devhub.backend.modules.auth.exception.UsernameAlreadyExistsException;
 import com.devhub.backend.modules.auth.config.JwtProperties;
 import com.devhub.backend.modules.auth.dto.*;
 import com.devhub.backend.modules.auth.entity.RefreshToken;

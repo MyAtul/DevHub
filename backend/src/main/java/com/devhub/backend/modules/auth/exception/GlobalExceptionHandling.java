@@ -1,13 +1,11 @@
-package com.devhub.backend.common.exception;
+package com.devhub.backend.modules.auth.exception;
 
-import com.devhub.backend.common.response.ApiErrorResponse;
+import com.devhub.backend.modules.auth.response.ApiErrorResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-
-import java.time.LocalDateTime;
 
 @ControllerAdvice
 public class GlobalExceptionHandling {

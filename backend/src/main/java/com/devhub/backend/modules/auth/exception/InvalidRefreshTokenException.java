@@ -1,4 +1,4 @@
-package com.devhub.backend.common.exception;
+package com.devhub.backend.modules.auth.exception;
 
 import org.springframework.http.HttpStatus;
 

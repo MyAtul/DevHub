@@ -1,4 +1,4 @@
-package com.devhub.backend.common.util;
+package com.devhub.backend.modules.auth.util;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
