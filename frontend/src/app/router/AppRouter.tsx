@@ -7,6 +7,7 @@ import DashboardPage from '../../platform/pages/DashboardPage'
 import LoginPage from '../../modules/auth/pages/LoginPage'
 import RegisterPage from '../../modules/auth/pages/RegisterPage'
 import PageNotFound from '../../platform/pages/PageNotFound'
+import ProtectedRoute from '../../modules/auth/routes/ProtectedRoutes'
 
 const router = createBrowserRouter([
     {
@@ -27,7 +28,13 @@ const router = createBrowserRouter([
             },
             {
                 path:"dashboard",
-                element:<DashboardPage/>
+                element:<ProtectedRoute/>,
+                children:[
+                    {
+                        path: "dashboard",
+                        element: <DashboardPage />,
+                    },
+                ]
             },
             {
                 path:"login",

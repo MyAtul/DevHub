@@ -1,8 +1,9 @@
+import LoginForm from "../components/LoginForm";
 
-const LoginPage = () => {
+export default function LoginPage() {
   return (
-    <div>LoginPage</div>
-  )
+    <div className="mx-auto flex min-h-[80vh] max-w-md items-center justify-center px-6">
+      <LoginForm />
+    </div>
+  );
 }
-
-export default LoginPage
