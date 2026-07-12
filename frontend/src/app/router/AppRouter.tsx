@@ -27,7 +27,6 @@ const router = createBrowserRouter([
                 element:<AuthenticationModulePage/>
             },
             {
-                path:"dashboard",
                 element:<ProtectedRoute/>,
                 children:[
                     {
