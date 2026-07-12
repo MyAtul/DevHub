@@ -102,7 +102,9 @@ export default function AuthProvider({
     }
 
     async function logout(): Promise<void> {
+        tokenStorage.clearAuthStorage();
 
+        setSession(initialSession);
     }
 
   return (
