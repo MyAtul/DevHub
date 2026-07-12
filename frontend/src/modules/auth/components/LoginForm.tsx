@@ -1,6 +1,6 @@
 import { useState } from "react";
 import useAuth from "../hooks/useAuth";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function LoginForm() {
   const { login, loading } = useAuth();
@@ -9,6 +9,7 @@ export default function LoginForm() {
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate()
+  const location = useLocation()
 
   async function handleSubmit(
     e: React.FormEvent<HTMLFormElement>
@@ -20,7 +21,11 @@ export default function LoginForm() {
       password,
     });
 
-    navigate("/dashboard")
+    const from = location.state?.from || "/dashboard";
+
+    navigate(from, {
+      replace: true,
+    });
   }
 
   return (

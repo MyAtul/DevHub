@@ -1,27 +1,38 @@
+import DownloadCard from "./DownloadCard";
+
 export default function DownloadSection() {
-    return (
-        <section className="py-16">
 
-            <h2 className="mb-8 text-3xl font-bold">
-                Download Module
-            </h2>
+  return (
 
-            <div className="flex flex-wrap gap-4">
+    <section className="py-16">
 
-                <button className="rounded-lg bg-white px-6 py-3 text-black">
-                    Backend
-                </button>
+      <h2 className="mb-10 text-3xl font-bold">
+        Download Module
+      </h2>
 
-                <button className="rounded-lg bg-white px-6 py-3 text-black">
-                    Frontend
-                </button>
+      <div className="grid gap-6 md:grid-cols-3">
 
-                <button className="rounded-lg bg-white px-6 py-3 text-black">
-                    Full Module
-                </button>
+        <DownloadCard
+          title="Backend Module"
+          description="Spring Boot, Spring Security, JWT Authentication"
+          downloadType="backend"
+        />
 
-            </div>
+        <DownloadCard
+          title="Frontend Module"
+          description="React, TypeScript, Context API"
+          downloadType="frontend"
+        />
 
-        </section>
-    );
+        <DownloadCard
+          title="Full Stack Module"
+          description="Backend + Frontend + Documentation"
+          downloadType="full"
+        />
+
+      </div>
+
+    </section>
+
+  );
 }

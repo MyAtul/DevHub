@@ -98,7 +98,14 @@ export default function AuthProvider({
     }, []);
 
     async function register(request: RegisterRequest): Promise<void> {
+      try {
+        setLoading(true);
 
+        await authService.register(request);
+
+      } finally {
+        setLoading(false);
+      }
     }
 
     async function logout(): Promise<void> {
