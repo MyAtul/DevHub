@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1/modules")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = {"http://localhost:5173","https://dev-hub-gamma-three.vercel.app"})
 public class ModuleDownloadController {
 
     private final ModuleDownloadService moduleDownloadService;
