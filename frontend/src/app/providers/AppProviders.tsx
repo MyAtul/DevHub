@@ -1,4 +1,4 @@
-import React, { type ReactNode } from 'react'
+import { type ReactNode } from 'react'
 import AuthProvider from '../../modules/auth/context/AuthContext'
 
 type AppProvidersProps = {
