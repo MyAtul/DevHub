@@ -16,41 +16,42 @@ export default function AuthButtons(){
 
     if(!session.isAuthenticated){
         return(
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-4">
 
-                
-            <Link
-                to="/login"
-                className="text-gray-300 hover:text-white"
-            >
-                Login
-            </Link>
+                <Link
+                    to="/login"
+                    className="rounded-lg px-4 py-2 text-gray-300 transition hover:bg-gray-800 hover:text-white"
+                >
+                    Login
+                </Link>
 
-            <Link
-                to="/register"
-                className="rounded-lg bg-white hover:bg-gray-200 text-black px-4 py-2"
-            >
-                Register
-            </Link>
-        </div>
+                <Link
+                    to="/register"
+                    className="rounded-xl bg-white px-5 py-2 font-medium text-black transition-all duration-200 hover:scale-105 hover:bg-gray-100"
+                >
+                    Register
+                </Link>
+
+            </div>
         )
     }
 
     return (
-        <div className="flex gap-3">
+        <div className="flex items-center gap-4">
+
             <Link
                 to="/dashboard"
-                className="text-gray-300 hover:text-white"
+                className="rounded-lg px-4 py-2 text-gray-300 transition hover:bg-gray-800 hover:text-white"
             >
                 Dashboard
             </Link>
 
             <button
                 onClick={handleLogout}
-                className="text-gray-300 hover:text-white cursor-pointer bg-red-600 hover:bg-red-500 px-1 py-0.5 rounded"
+                className="cursor-pointer rounded-lg bg-red-600 px-4 py-2 font-medium text-white transition hover:bg-red-500"
             >
                 Logout
-        </button>
+            </button>
 
         </div>
         
