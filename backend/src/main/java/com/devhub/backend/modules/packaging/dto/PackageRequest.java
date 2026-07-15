@@ -1,7 +1,10 @@
 package com.devhub.backend.modules.packaging.dto;
 
-public class PackageRequest {
+public record PackageRequest(
 
-    String moduleName;
-    PackageType packageType;
+        String moduleName,
+
+        PackageType packageType
+
+) {
 }
