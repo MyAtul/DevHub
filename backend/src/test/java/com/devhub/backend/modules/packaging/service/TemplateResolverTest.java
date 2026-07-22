@@ -24,7 +24,11 @@ class TemplateResolverTest {
 
         PackageContext context = new PackageContext(
                 "authentication",
-                PackageType.BACKEND
+                PackageType.BACKEND,
+                "com.example",
+                "demo-auth",
+                "com.example.demo.auth",
+                "DemoApplication"
         );
 
         Path template = templateResolver.resolveTemplate(context);

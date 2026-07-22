@@ -1,11 +1,11 @@
 package com.devhub.backend.modules.packaging.service;
 
-import org.springframework.stereotype.Service;
+import com.devhub.backend.modules.packaging.model.PackageContext;
 
 import java.nio.file.Path;
 
 
 public interface WorkspaceService {
 
-    Path createWorkspace(Path templatePath);
+    Path createWorkspace(PackageContext context);
 }

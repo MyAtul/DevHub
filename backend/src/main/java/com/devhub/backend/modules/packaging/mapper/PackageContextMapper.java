@@ -11,7 +11,11 @@ public class PackageContextMapper {
 
         return new PackageContext(
                 request.moduleName(),
-                request.packageType()
+                request.packageType(),
+                request.groupId(),
+                request.artifactId(),
+                request.packageName(),
+                request.applicationName()
         );
 
     }

@@ -6,5 +6,5 @@ import java.nio.file.Path;
 
 @Service
 public interface ZipService {
-    byte[] zip(Path directory);
+    Path createZip(Path workspace);
 }
